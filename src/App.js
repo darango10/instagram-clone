@@ -6,6 +6,7 @@ import Modal from '@material-ui/core/Modal';
 import {makeStyles} from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
+import ImageUpload from "./components/ImageUpload";
 
 function getModalStyle() {
     const top = 50;
@@ -71,7 +72,7 @@ function App() {
     }, [user, values.username])
 
     useEffect(() => {
-        db.collection('posts').onSnapshot(snapshot => {
+        db.collection('posts').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
             setPosts(snapshot.docs.map(doc => ({
                 id: doc.id,
                 post: doc.data()
@@ -114,6 +115,7 @@ function App() {
 
     return (
         <div className="app">
+
             <Modal
                 open={open}
                 onClose={() => setOpen(false)}
@@ -190,16 +192,7 @@ function App() {
 
                 </div>
             </Modal>
-            {user
-                ?
-                <Button onClick={() => auth.signOut()}>Logout</Button>
-                :
-                <div className="app__loginContainer">
-                    <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-                    <Button onClick={() => setOpen(true)}>Sign Up</Button>
-                </div>
 
-            }
 
             <div className="app__header">
                 <img
@@ -207,6 +200,19 @@ function App() {
                     src="https://instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
                     alt="Instagram Logo"
                 />
+
+                {user && <ImageUpload username={user.displayName}/>}
+
+                {user
+                    ?
+                    <Button onClick={() => auth.signOut()}>Logout</Button>
+                    :
+                    <div className="app__loginContainer">
+                        <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+                        <Button onClick={() => setOpen(true)}>Sign Up</Button>
+                    </div>
+
+                }
 
             </div>
             {posts.map(({id, post}) => (
@@ -217,6 +223,7 @@ function App() {
                     caption={post.caption}
                 />
             ))}
+
         </div>
     );
 }

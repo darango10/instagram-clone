@@ -12,10 +12,17 @@
   padding: 20px;
   background-color:white;
   border-bottom: 1px solid lightgrey;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .app__signup{
   display:flex;
   flex-direction: column;
   text-align: center;
+}
+
+.app__headerImage{
+  object-fit: contain;
 }
