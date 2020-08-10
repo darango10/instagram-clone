@@ -4,25 +4,44 @@
 
 .app{
   background-color: #fafafa;
-  height:100vh;
+  height: auto;
 }
 
 .app__header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   object-fit: contain;
   padding: 20px;
-  background-color:white;
+  background-color: white;
   border-bottom: 1px solid lightgrey;
-  display:flex;
+  display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.app__signup{
-  display:flex;
+.app__posts {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.app__signup {
+  display: flex;
   flex-direction: column;
   text-align: center;
 }
 
-.app__headerImage{
+.app__headerImage {
   object-fit: contain;
 }
+
+.app__postsLeft {
+
+}
+
+.app__postsRight {
+  margin-left: 20px;
+}
+
+
